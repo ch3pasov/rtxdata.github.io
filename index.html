@@ -265,6 +265,13 @@
             reader.readAsText(file);
         });
 
+        window.addEventListener('message', event => {
+            if (event.origin === "https://rol.raiffeisenbank.rs" && event.data.name && event.data.value) {
+                localStorage[event.data.name] = event.data.value;
+                location.reload();
+            }
+        });
+
         init();
     </script>
 </body>
