@@ -95,7 +95,8 @@ def init_database(init_query):
             for tx in data['transactions'][account][0][1]:
                 date = format_date_string(tx[3])
                 ref = tx[6] if tx[6] == tx[14] else tx[6] + " " + tx[14]
-                sum = float(tx[9]) if tx[8] == '0' else -1 * float(tx[8])
+                debit = float(tx[8])
+                sum = float(tx[9]) if debit == 0 else -debit
                 (kat1, kat2) = parse_ref(ref)
                 curr = tx[2]
                 txn = (tx[7], sum, sum * rates_rsd[curr], curr, kat1,
